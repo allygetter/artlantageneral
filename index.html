@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEXT Research Topics — Kenya–Japan Bridge</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08080f;
+    --surface: #0d0d1a;
+    --surface2: #111120;
+    --border: #1c1c2e;
+    --text: #e2ddd0;
+    --muted: #6a6a88;
+    --dim: #3a3a52;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px 22px;
+    background: linear-gradient(180deg, #0c0c1c 0%, transparent 100%);
+  }
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f0ece0;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  /* LAYOUT */
+  .layout {
+    display: flex;
+    height: calc(100vh - 90px);
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 255px;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 12px 0;
+    flex-shrink: 0;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+
+  .nav-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+    padding: 11px 18px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { background: #0e0e1c; }
+  .nav-btn.active { background: #121220; }
+  .nav-btn .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    margin-right: 6px;
+  }
+  .nav-btn .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .nav-btn .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .nav-btn.active .label { color: #9090b0; }
+
+  /* MAIN PANEL */
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 36px 44px 60px;
+  }
+  .main::-webkit-scrollbar { width: 4px; }
+  .main::-webkit-scrollbar-track { background: transparent; }
+  .main::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+
+  /* TOPIC CARD (hidden/shown) */
+  .topic { display: none; }
+  .topic.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .badges {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .badge-tag {
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .badge-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .badge-field {
+    margin-left: auto;
+    background: var(--surface2);
+    color: var(--dim);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  h2.title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f0ece0;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin-bottom: 7px;
+  }
+  p.subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    margin-bottom: 30px;
+    letter-spacing: 0.01em;
+  }
+
+  .research-q {
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    border-left-width: 3px;
+    border-left-style: solid;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    background: #0c0c18;
+  }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .research-q p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #c8c4b4;
+    font-style: italic;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 15px 18px;
+  }
+  .info-card .value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #9a9880;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  .kw-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+  }
+  .kw {
+    background: var(--surface2);
+    border: 1px solid #252535;
+    color: #7878a0;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .mext-box {
+    background: #0a0a14;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .mext-box p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #55556e;
+    line-height: 1.9;
+    margin-top: 8px;
+  }
+
+  /* NAV BUTTONS */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .nav-arrow {
+    background: transparent;
+    border: 1px solid #252535;
+    color: #666;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    transition: all 0.15s;
+  }
+  .nav-arrow:hover:not(:disabled) { border-color: #44445a; color: #aaa; }
+  .nav-arrow:disabled { color: #252535; cursor: default; border-color: #161624; }
+  .nav-counter {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #333;
+  }
+
+  @media (max-width: 700px) {
+    .layout { flex-direction: column; height: auto; }
+    .sidebar { width: 100%; height: 120px; border-right: none; border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; overflow-y: hidden; padding: 8px 0; flex-direction: row; }
+    .nav-btn { min-width: 110px; border-left: none; border-bottom: 3px solid transparent; }
+    .nav-btn.active { border-bottom-color: var(--active-color, #888); border-left-color: transparent; }
+    .main { padding: 24px 20px 48px; }
+    .info-grid { grid-template-columns: 1fr; }
+    header { padding: 20px 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">MEXT Scholarship 2025–2026 · Masters Research Proposals</div>
+  <h1>Kenya–Japan Research Bridge</h1>
+  <p>10 thesis-ready topics · Civil, Environmental & Urban Engineering</p>
+</header>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar"></nav>
+
+  <!-- MAIN -->
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+const topics = [
+  {
+    id:"01", tag:"Hydrology & AI", color:"#0ea5e9",
+    title:"AI-Downscaled Flood Forecasting for the Lake Victoria Basin",
+    subtitle:"Real-Time Early Warning Systems for Rural Kenya",
+    question:"How can deep learning be used to downscale ICHARM's global flood prediction models to sub-catchment resolution for the Nyando and Tana River basins, enabling community-level early warning systems with lead times exceeding 48 hours?",
+    bridge:"ICHARM (Japan) × Kenya Meteorological Department",
+    impact:"Protect 200,000+ rural residents from annual flash floods",
+    keywords:["Hydrological Modeling","Deep Learning","Remote Sensing","Disaster Risk Reduction"],
+    field:"Civil / Water Resources Engineering"
+  },
+  {
+    id:"02", tag:"Materials & Sustainability", color:"#10b981",
+    title:"Structural Standards for Volcanic Pozzolana 'Green Concrete' in East Africa",
+    subtitle:"Leveraging Rift Valley Geology for Low-Carbon Infrastructure",
+    question:"Can Japanese cement chemistry protocols establish a regionally-applicable durability standard for Kenyan volcanic ash concrete, reducing Portland cement dependency by over 40% in East African construction projects?",
+    bridge:"JSCE Standards × Kenya Bureau of Standards",
+    impact:"Reduce embodied carbon across the East African infrastructure sector",
+    keywords:["Supplementary Cementitious Materials","Durability Testing","Low-Carbon Construction","Structural Chemistry"],
+    field:"Structural / Materials Engineering"
+  },
+  {
+    id:"03", tag:"Urban Health & CFD", color:"#f59e0b",
+    title:"CFD-Driven Epidemiological Modeling in Nairobi's Informal Settlements",
+    subtitle:"Linking Built Environment Geometry to Pathogen Transmission",
+    question:"How do micro-scale drainage infrastructure and building ventilation geometry in Kibera and Mathare affect SEIR epidemic dynamics of waterborne and airborne diseases, as modeled via Computational Fluid Dynamics?",
+    bridge:"University of Tokyo CFD Lab × University of Nairobi",
+    impact:"Inform evidence-based slum upgrading policy for 2.5 million residents",
+    keywords:["SEIR Modeling","Computational Fluid Dynamics","Spatial Epidemiology","Urban Informality"],
+    field:"Environmental / Urban Engineering"
+  },
+  {
+    id:"04", tag:"Seismic Engineering", color:"#ef4444",
+    title:"Affordable Base Isolation for Masonry Buildings in the East African Rift",
+    subtitle:"Adapting Japanese Seismic Technology for Local Soils and Materials",
+    question:"Can low-cost rubber-bearing or friction pendulum isolation systems be re-engineered using locally available materials for unreinforced masonry buildings on the volcanic lacustrine soils of Nakuru and Eldoret?",
+    bridge:"NIED Japan × Kenya Building Research Centre",
+    impact:"Seismically protect hundreds of thousands of Rift Valley buildings",
+    keywords:["Base Isolation","Unreinforced Masonry","Seismic Hazard","Low-Cost Retrofit"],
+    field:"Structural / Earthquake Engineering"
+  },
+  {
+    id:"05", tag:"Smart Cities & AI", color:"#8b5cf6",
+    title:"AI-Simulated Pedestrian Flow for Nairobi Railway City's Transit-Oriented Development",
+    subtitle:"Applying Tokyo's Station-City Model to Sub-Saharan Africa",
+    question:"Using agent-based modeling calibrated on Tokyo's Shinjuku station data, what station-city spatial configurations optimize pedestrian throughput and commercial vitality for the proposed Nairobi Railway City hub?",
+    bridge:"MLIT Japan × Kenya Railways Corporation",
+    impact:"Shape Africa's most ambitious urban transit infrastructure project",
+    keywords:["Agent-Based Modeling","Transit-Oriented Development","Urban Simulation","Pedestrian Dynamics"],
+    field:"Urban / Transportation Engineering"
+  },
+  {
+    id:"06", tag:"Geothermal & Foundations", color:"#06b6d4",
+    title:"Thermoactive Energy Pile Systems for Kenya's Geothermal Industrial Corridor",
+    subtitle:"Dual-Function Foundations as Structural Support and Heat Exchangers",
+    question:"What pile geometry and thermally conductive concrete mix designs maximize energy extraction efficiency for thermoactive piles installed in the high-temperature ground conditions of the Naivasha Special Economic Zone?",
+    bridge:"Tokyo Institute of Technology × KenGen / EPZA",
+    impact:"Provide renewable heating and cooling to Naivasha industrial facilities",
+    keywords:["Energy Geostructures","Thermal Pile Design","Geothermal Energy","Foundation Engineering"],
+    field:"Geotechnical / Energy Engineering"
+  },
+  {
+    id:"07", tag:"IoT & Infrastructure", color:"#f97316",
+    title:"Low-Cost IoT Sensor Networks for AI-Predicted Bridge Maintenance on the Northern Corridor",
+    subtitle:"From Manual Inspection to Predictive Structural Health Monitoring",
+    question:"Can a sparse, low-power MEMS sensor network combined with an LSTM neural network accurately predict fatigue-driven maintenance needs for Kenyan highway bridges, reducing inspection costs by over 60%?",
+    bridge:"PWRI Japan × Kenya National Highways Authority",
+    impact:"Reduce road maintenance costs along Kenya's critical trade corridor",
+    keywords:["Structural Health Monitoring","LSTM Neural Networks","Bridge Fatigue","Low-Power IoT"],
+    field:"Structural / Civil Engineering"
+  },
+  {
+    id:"08", tag:"Coastal Geotechnics", color:"#3b82f6",
+    title:"Geotechnical Vulnerability of Mombasa Port Berths to Projected Sea-Level Rise",
+    subtitle:"Adaptive Coastal Foundation Engineering for East African Ports",
+    question:"How do IPCC sea-level rise scenarios affect the bearing capacity and liquefaction susceptibility of the marine clay deposits underlying Dongo Kundu's new container berths, and what Japanese adaptive countermeasures are transferable?",
+    bridge:"Port of Yokohama Technical Research × Kenya Ports Authority",
+    impact:"Future-proof Kenya's primary gateway for Indian Ocean trade",
+    keywords:["Marine Geotechnics","Sea-Level Rise Adaptation","Liquefaction","Coastal Infrastructure"],
+    field:"Geotechnical / Coastal Engineering"
+  },
+  {
+    id:"09", tag:"Waste & Structures", color:"#84cc16",
+    title:"Structural Framework Design for Waste-to-Energy Plants on Unstable Landfill Ground",
+    subtitle:"Engineering Solutions for Nairobi's Dandora Remediation",
+    question:"What foundation system—raft, deep pile, or dynamic compaction—best mitigates differential settlement and methane-induced ground instability for a modular WtE plant footprint on the heterogeneous waste fill at Dandora?",
+    bridge:"Japan Waste Research Foundation × Nairobi City County",
+    impact:"Convert Nairobi's largest environmental hazard into clean energy",
+    keywords:["Ground Improvement","Landfill Engineering","Methane Gas Management","Modular Plant Design"],
+    field:"Structural / Geotechnical Engineering"
+  },
+  {
+    id:"10", tag:"Sponge City / Pavements", color:"#ec4899",
+    title:"Performance of Japanese Permeable Pavement Systems Under Tropical Rainfall and Heavy Axle Loading",
+    subtitle:"Adapting Sponge City Technology for Kenyan Urban Roads",
+    question:"Do Japanese-specification permeable concrete and interlocking block pavements maintain adequate infiltration rates (>100 mm/hr) and structural integrity (CBR ≥ 80%) after repeated heavy-vehicle loading under Nairobi's seasonal rainfall regime?",
+    bridge:"NILIM Japan × Kenya Roads Board",
+    impact:"Eliminate urban flash floods across Nairobi's road network",
+    keywords:["Permeable Pavement","Urban Stormwater","Pavement Mechanics","Tropical Hydrology"],
+    field:"Transportation / Geotechnical Engineering"
+  }
+];
+
+let current = 0;
+
+function hexAlpha(hex, a) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function buildSidebar() {
+  const nav = document.getElementById('sidebar');
+  nav.innerHTML = topics.map((t, i) => `
+    <button class="nav-btn ${i===current?'active':''}" onclick="show(${i})" style="border-left-color:${i===current?t.color:'transparent'}">
+      <div>
+        <span class="num" style="color:${t.color}">${t.id}</span>
+        <span class="tag" style="color:${i===current?t.color:'#3a3a52'}">${t.tag}</span>
+      </div>
+      <div class="label">${t.title.substring(0,42)}…</div>
+    </button>
+  `).join('');
+}
+
+function buildMain() {
+  const main = document.getElementById('main');
+  main.innerHTML = topics.map((t, i) => `
+    <div class="topic ${i===current?'active':''}" id="topic-${i}">
+      <div class="badges">
+        <span class="badge-tag" style="background:${hexAlpha(t.color,0.12)};color:${t.color};border:1px solid ${hexAlpha(t.color,0.28)}">${t.tag}</span>
+        <span class="badge-num">Topic ${t.id} / 10</span>
+        <span class="badge-field">${t.field}</span>
+      </div>
+
+      <h2 class="title">${t.title}</h2>
+      <p class="subtitle" style="color:${t.color}">${t.subtitle}</p>
+
+      <div class="research-q" style="border-left-color:${t.color};border-color:${hexAlpha(t.color,0.22)};">
+        <div class="section-label" style="color:${t.color}">Central Research Question</div>
+        <p>${t.question}</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="section-label">Japan–Kenya Bridge</div>
+          <div class="value">${t.bridge}</div>
+        </div>
+        <div class="info-card">
+          <div class="section-label">Development Impact</div>
+          <div class="value">${t.impact}</div>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-bottom:10px">Research Keywords</div>
+      <div class="kw-list">
+        ${t.keywords.map(k=>`<span class="kw">${k}</span>`).join('')}
+      </div>
+
+      <div class="mext-box">
+        <div class="section-label">MEXT Application Strength</div>
+        <p>
+          ✦ Bilateral relevance — solves a Kenyan problem using uniquely Japanese expertise<br>
+          ✦ Measurable outcomes suitable for a 2-year Masters thesis<br>
+          ✦ Aligned with Japan's ODA priorities and SDGs 9, 11, and 13
+        </p>
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-arrow" onclick="show(${i-1})" ${i===0?'disabled':''}>← Previous</button>
+        <span class="nav-counter">${i+1} / ${topics.length}</span>
+        <button class="nav-arrow" onclick="show(${i+1})" ${i===topics.length-1?'disabled':''}>Next →</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function show(i) {
+  if (i < 0 || i >= topics.length) return;
+  current = i;
+  buildSidebar();
+  document.querySelectorAll('.topic').forEach((el,j) => {
+    el.classList.toggle('active', j===i);
+  });
+  document.getElementById('main').scrollTop = 0;
+}
+
+buildSidebar();
+buildMain();
+</script>
+</body>
+</html>
